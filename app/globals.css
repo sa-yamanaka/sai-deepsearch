@@ -1,0 +1,432 @@
+:root {
+  /* 紙は白ではなく、わずかに緑を含んだ冷たい灰。方眼紙とラボノートの色 */
+  --paper: #f5f6f3;
+  --paper-sunk: #eceee9;
+  --ink: #16211f;
+  --ink-soft: #4a5450;
+  --muted: #79837e;
+  --rule: #dbdfd8;
+  /* 緑青（ろくしょう）。時間が経って初めて出る色を、長期記録のアクセントに */
+  --verdigris: #2e6a5e;
+  --amber: #9c7220;
+  --clay: #a34a3f;
+
+  --serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", "Songti SC", serif;
+  --sans: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, "Roboto Mono", monospace;
+
+  --measure: 660px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.95;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+/* ---------- 骨格 ---------- */
+
+.shell {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0 28px 140px;
+}
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 40px 0 30px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 56px;
+}
+
+.masthead__name {
+  font-family: var(--serif);
+  font-size: 21px;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.masthead__nav {
+  display: flex;
+  gap: 26px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.09em;
+}
+
+.masthead__nav a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+}
+
+.masthead__nav a:hover,
+.masthead__nav a:focus-visible { color: var(--verdigris); border-bottom-color: var(--verdigris); }
+
+.colophon {
+  margin-top: 96px;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ---------- 状態スタンプ（この site の要） ---------- */
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  padding: 3px 9px 3px 8px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  line-height: 1.7;
+  white-space: nowrap;
+}
+
+.stamp::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.stamp--検証中   { color: var(--verdigris); }
+.stamp--判定不能 { color: var(--amber); }
+.stamp--取り下げ { color: var(--clay); }
+.stamp--確定     { color: var(--ink); }
+.stamp--記録     { color: var(--muted); }
+
+/* ---------- トップ ---------- */
+
+.lede {
+  font-family: var(--serif);
+  font-size: clamp(23px, 3.6vw, 33px);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  margin: 0 0 30px;
+  max-width: 19em;
+  font-weight: 600;
+}
+
+.lede em {
+  font-style: normal;
+  color: var(--verdigris);
+}
+
+.standfirst {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin: 0 0 20px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin: 84px 0 22px;
+}
+
+.section-head h2 {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  margin: 0;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.section-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ---------- 系譜レール（署名要素） ---------- */
+/* 取り下げた仮説も消さずに残す、というこのサイトの姿勢をそのまま形にしたもの */
+
+.rail {
+  display: grid;
+  gap: 0;
+  margin: 30px 0 8px;
+}
+
+.rail__item {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 22px;
+  text-decoration: none;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+}
+
+.rail__item:last-child { border-bottom: 1px solid var(--rule); }
+
+.rail__mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding-top: 4px;
+  position: relative;
+}
+
+.rail__body h3 {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.65;
+  margin: 0 0 8px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.rail__item:hover h3,
+.rail__item:focus-visible h3 { color: var(--verdigris); }
+
+.rail__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.rail__series {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--verdigris);
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ---------- 記事 ---------- */
+
+.article { max-width: var(--measure); margin: 0 auto; }
+
+.article__head {
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 46px;
+}
+
+.article__kicker {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.article__title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4.4vw, 35px);
+  line-height: 1.62;
+  letter-spacing: 0.015em;
+  margin: 0 0 20px;
+  font-weight: 600;
+}
+
+.article__stamps { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+/* 本文 */
+
+.prose { font-size: 16px; }
+
+.prose h2 {
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+  margin: 68px 0 20px;
+  padding-left: 15px;
+  border-left: 3px solid var(--verdigris);
+  font-weight: 600;
+}
+
+.prose h3 {
+  font-family: var(--sans);
+  font-size: 16px;
+  margin: 44px 0 14px;
+  letter-spacing: 0.02em;
+}
+
+.prose p { margin: 0 0 24px; }
+
+.prose strong { font-weight: 600; }
+
+.prose a { color: var(--verdigris); text-underline-offset: 3px; }
+
+.prose blockquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  background: var(--paper-sunk);
+  border-left: 3px solid var(--rule);
+  font-size: 15px;
+}
+
+.prose blockquote p:last-child { margin-bottom: 0; }
+
+.prose figure { margin: 46px 0; }
+
+.prose figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+
+.prose figcaption {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.85;
+  color: var(--muted);
+  margin-top: 13px;
+  padding-left: 13px;
+  border-left: 2px solid var(--rule);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 34px 0;
+  font-size: 13.5px;
+  font-family: var(--sans);
+}
+
+.prose th, .prose td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.75;
+}
+
+.prose th {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  font-weight: 500;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--ink-soft);
+  white-space: nowrap;
+}
+
+.prose tbody tr:hover { background: var(--paper-sunk); }
+
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 56px 0 30px; }
+
+.prose ul, .prose ol { margin: 0 0 24px; padding-left: 1.3em; }
+.prose li { margin-bottom: 9px; }
+
+.prose em { color: var(--muted); font-style: normal; font-size: 14px; }
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--paper-sunk);
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+/* 記事末の前後リンク */
+
+.seriesnav {
+  margin-top: 76px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  gap: 14px;
+}
+
+.seriesnav__label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.seriesnav a {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 16px;
+  text-decoration: none;
+  font-size: 14.5px;
+  line-height: 1.7;
+  padding: 9px 0;
+  align-items: baseline;
+}
+
+.seriesnav a[aria-current="page"] { color: var(--muted); }
+.seriesnav a:hover { color: var(--verdigris); }
+
+.seriesnav__n {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+/* ---------- 応答 ---------- */
+
+@media (max-width: 620px) {
+  .shell { padding: 0 20px 100px; }
+  .rail__item { grid-template-columns: 1fr; gap: 8px; }
+  .rail__mark { padding-top: 0; }
+  .masthead { padding: 28px 0 22px; margin-bottom: 40px; }
+  .prose figure { margin: 34px 0; }
+  .prose table { font-size: 12.5px; display: block; overflow-x: auto; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--verdigris);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
