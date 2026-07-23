@@ -1,4 +1,3 @@
-[01-naze-kono-kasetsu.md](https://github.com/user-attachments/files/30292051/01-naze-kono-kasetsu.md)
 ---
 title: "なぜ「発現のゆらぎは決定論かもしれない」と考えたのか"
 date: 2026-07-23
